@@ -1,6 +1,6 @@
 {
   "name": "8router",
-  "version": "0.5.18",
+  "version": "0.5.20",
   "description": "8Router - Universal AI Gateway",
   "bin": {
     "8router": "./bin/8router.js"
@@ -8,11 +8,15 @@
   "files": [
     "bin/",
     "cli/cli.js",
-    "cli/src/",
     "cli/app/",
     "cli/package.json",
     "cli/README.md",
     "cli/LICENSE",
+    "cli-utils/",
+    "cli-tray/",
+    "cli-menus/",
+    "cli-api/",
+    "cli-terminalUI.js",
     ".next/standalone/",
     ".next/static/",
     "public/",

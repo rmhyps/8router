@@ -514,9 +514,9 @@ checkForUpdate().then((latestVersion) => {
 
 // Show interface selection menu
 async function showInterfaceMenu(latestVersion) {
-  const { selectMenu } = require("./src/cli/utils/input");
-  const { clearScreen } = require("./src/cli/utils/display");
-  const { getEndpoint } = require("./src/cli/utils/endpoint");
+  const { selectMenu } = require("../cli-utils/input");
+  const { clearScreen } = require("../cli-utils/display");
+  const { getEndpoint } = require("../cli-utils/endpoint");
 
   clearScreen();
 
@@ -609,7 +609,7 @@ function startServer(latestVersion) {
     try {
       // Kill tray if running
       try {
-        const { killTray } = require("./src/cli/tray/tray");
+        const { killTray } = require("../cli-tray/tray");
         killTray();
       } catch (e) { }
       // Kill MIT server (privileged process) via PID file
@@ -656,7 +656,7 @@ function startServer(latestVersion) {
   // Initialize tray icon (runs alongside TUI)
   const initTrayIcon = () => {
     try {
-      const { initTray } = require("./src/cli/tray/tray");
+      const { initTray } = require("../cli-tray/tray");
       initTray({
         port,
         onQuit: () => {
@@ -696,12 +696,20 @@ function startServer(latestVersion) {
     initTrayIcon();
 
     try {
+      // If stdin is not a TTY (piped/redirected), skip the interactive menu
+      // and just keep the server running.
+      if (!process.stdin.isTTY) {
+        console.log(`\n🚀 ${pkg.name} v${pkg.version} running at http://${displayHost}:${port}`);
+        console.log("   Server is running in background (no interactive menu in non-TTY context).");
+        return;
+      }
+
       while (true) {
         const choice = await showInterfaceMenu(latestVersion);
 
         if (choice === "update") {
           isShuttingDown = true;
-          const { clearScreen } = require("./src/cli/utils/display");
+          const { clearScreen } = require("../cli-utils/display");
           clearScreen();
           console.log(`\n⬆  Update v${pkg.version} → v${latestVersion}\n`);
           console.log(`Run this after exit:\n`);
@@ -714,20 +722,20 @@ function startServer(latestVersion) {
         } else if (choice === "web") {
           openBrowser(url);
           // Wait for user to come back
-          const { pause } = require("./src/cli/utils/input");
+          const { pause } = require("../cli-utils/input");
           await pause("\nPress Enter to go back to menu...");
         } else if (choice === "terminal") {
           // Start Terminal UI - it will return when user selects Back
-          const { startTerminalUI } = require("./src/cli/terminalUI");
+          const { startTerminalUI } = require("../cli-terminalUI");
           await startTerminalUI(port);
           // Loop continues, show menu again
         } else if (choice === "hide") {
-          const { clearScreen } = require("./src/cli/utils/display");
+          const { clearScreen } = require("../cli-utils/display");
           clearScreen();
 
           // Enable auto startup on OS boot
           try {
-            const { enableAutoStart } = require("./src/cli/tray/autostart");
+            const { enableAutoStart } = require("../cli-tray/autostart");
             enableAutoStart(__filename);
           } catch (e) { }
 
