@@ -34,9 +34,9 @@ function cleanupLegacySystray({ silent = false } = {}) {
     if (fs.existsSync(dir)) {
       try {
         fs.rmSync(dir, { recursive: true, force: true });
-        if (!silent) console.log(`[9router][runtime] removed legacy systray: ${dir}`);
+        if (!silent) console.log(`[8router][runtime] removed legacy systray: ${dir}`);
       } catch (e) {
-        if (!silent) console.warn(`[9router][runtime] failed to remove ${dir}: ${e.message}`);
+        if (!silent) console.warn(`[8router][runtime] failed to remove ${dir}: ${e.message}`);
       }
     }
   }

@@ -1,34 +1,21 @@
 #!/usr/bin/env node
 
-const { execSync } = require('child_process');
+// 8Router CLI Entry Point
+// This script runs the full CLI with tray support, menu, and all features
+
 const path = require('path');
 const fs = require('fs');
-const os = require('os');
 
-const dir = path.join(__dirname, '..');
-const dataDir = path.join(os.homedir(), '.8router');
+// Get the CLI directory
+const cliDir = path.join(__dirname, '..', 'cli');
+const cliJs = path.join(cliDir, 'cli.js');
 
-// Create data directory if not exists
-if (!fs.existsSync(dataDir)) {
-  fs.mkdirSync(dataDir, { recursive: true });
+// Check if CLI exists
+if (!fs.existsSync(cliJs)) {
+  console.error('Error: CLI not found at', cliJs);
+  console.error('Please run "pnpm install" first.');
+  process.exit(1);
 }
 
-// Build if not built yet
-if (!fs.existsSync(path.join(dir, '.next'))) {
-  console.log('Building 8router for first time...');
-  execSync('pnpm run build', { cwd: dir, stdio: 'inherit' });
-}
-
-// Set environment
-process.env.DATA_DIR = dataDir;
-process.env.NODE_ENV = process.env.NODE_ENV || 'production';
-
-// Start server
-const port = process.env.PORT || 3003;
-process.env.PORT = port;
-
-console.log(`\n  8Router v0.5.12`);
-console.log(`  Dashboard: http://localhost:${port}`);
-console.log(`  API: http://localhost:${port}/v1\n`);
-
-execSync('node server.js', { cwd: dir, stdio: 'inherit' });
+// Run the CLI
+require(cliJs);

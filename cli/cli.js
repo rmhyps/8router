@@ -150,8 +150,8 @@ function compareVersions(a, b) {
 // Get app data dir (matches app/src/lib/dataDir.js convention)
 function getAppDataDir() {
   return process.platform === "win32"
-    ? path.join(process.env.APPDATA || "", "9router")
-    : path.join(os.homedir(), ".9router");
+    ? path.join(process.env.APPDATA || "", "8router")
+    : path.join(os.homedir(), ".8router");
 }
 
 // Kill PID from file (best-effort, removes file after)
@@ -799,7 +799,7 @@ function startServer(latestVersion) {
     if (restartCount >= MAX_RESTARTS) {
       console.error(`\n⚠️  Server crashed ${MAX_RESTARTS} times. Disabling MIT and restarting...`);
       try {
-        const dbPath = path.join(os.homedir(), process.platform === "win32" ? path.join("AppData", "Roaming", "9router", "db.json") : path.join(".9router", "db.json"));
+        const dbPath = path.join(os.homedir(), process.platform === "win32" ? path.join("AppData", "Roaming", "8router", "db.json") : path.join(".8router", "db.json"));
         if (fs.existsSync(dbPath)) {
           const db = JSON.parse(fs.readFileSync(dbPath, "utf-8"));
           if (db.settings) db.settings.mitmEnabled = false;
