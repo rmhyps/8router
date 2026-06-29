@@ -33,10 +33,10 @@ export default function CombosPage() {
   const fetchData = async () => {
     try {
       const [combosRes, providersRes, settingsRes, modelsRes] = await Promise.all([
-        fetchCached("/api/combos"),
-        fetchCached("/api/providers"),
-        fetchCached("/api/settings"),
-        fetchCached("/api/models"),
+        fetchCached("/api/combos", { bypassCache: true }),
+        fetchCached("/api/providers", { bypassCache: true }),
+        fetchCached("/api/settings", { bypassCache: true }),
+        fetchCached("/api/models", { bypassCache: true }),
       ]);
       const combosData = await combosRes.json();
       const providersData = await providersRes.json();

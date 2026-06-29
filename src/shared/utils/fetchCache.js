@@ -19,7 +19,7 @@ function makeKey(url, options = {}) {
 export async function fetchCached(url, options = {}) {
   const key = makeKey(url, options);
 
-  if (cache.has(key)) {
+  if (!options.bypassCache && cache.has(key)) {
     // Return a fresh Response built from the cached body so the consumer
     // can freely call .json() / .text() on it.
     const { body, status, statusText, headers } = cache.get(key);
@@ -32,7 +32,9 @@ export async function fetchCached(url, options = {}) {
   const headers = res.headers;
   const status = res.status;
   const statusText = res.statusText;
-  cache.set(key, { body, status, statusText, headers });
+  if (!options.bypassCache) {
+    cache.set(key, { body, status, statusText, headers });
+  }
   // Return a fresh Response for this caller.
   return new Response(body, { status, statusText, headers });
 }

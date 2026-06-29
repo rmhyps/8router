@@ -548,13 +548,14 @@ export default function APIPageClient({ machineId }) {
     setEditKinds((prev) => prev.includes(kind) ? prev.filter((k) => k !== kind) : [...prev, kind]);
   };
 
-  const fetchData = async () => {
+  const fetchData = async (bypassCache = false) => {
     try {
+      const opts = bypassCache ? { bypassCache: true } : {};
       const [keysRes, providersRes, combosRes, nodesRes] = await Promise.all([
-        fetchCached("/api/keys"),
-        fetchCached("/api/providers"),
-        fetchCached("/api/combos"),
-        fetchCached("/api/provider-nodes"),
+        fetchCached("/api/keys", opts),
+        fetchCached("/api/providers", opts),
+        fetchCached("/api/combos", opts),
+        fetchCached("/api/provider-nodes", opts),
       ]);
       const keysData = await keysRes.json();
       if (keysRes.ok) {
@@ -936,7 +937,7 @@ export default function APIPageClient({ machineId }) {
 
       if (res.ok) {
         setCreatedKey(data.key);
-        await fetchData();
+        await fetchData(true);
         setNewKeyName("");
         setShowAddModal(false);
       }

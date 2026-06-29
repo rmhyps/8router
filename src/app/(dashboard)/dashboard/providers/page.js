@@ -148,8 +148,8 @@ export default function ProvidersPage() {
     const fetchData = async () => {
       try {
         const [connectionsRes, nodesRes] = await Promise.all([
-          fetchCached("/api/providers"),
-          fetchCached("/api/provider-nodes"),
+          fetchCached("/api/providers", { bypassCache: true }),
+          fetchCached("/api/provider-nodes", { bypassCache: true }),
         ]);
         const connectionsData = await connectionsRes.json();
         const nodesData = await nodesRes.json();
