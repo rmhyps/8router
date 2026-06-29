@@ -1,6 +1,6 @@
 {
   "name": "8router",
-  "version": "0.5.12",
+  "version": "0.5.21",
   "description": "8Router CLI - Start and manage 8Router server",
   "bin": {
     "8router": "./cli.js"
