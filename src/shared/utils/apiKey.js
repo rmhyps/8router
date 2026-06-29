@@ -1,11 +1,7 @@
 import crypto from "crypto";
 
 function getApiKeySecret() {
-  const secret = process.env.API_KEY_SECRET;
-  if (!secret) {
-    throw new Error("API_KEY_SECRET environment variable is required");
-  }
-  return secret;
+  return process.env.API_KEY_SECRET || "endpoint-proxy-api-key-secret";
 }
 
 /**
