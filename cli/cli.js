@@ -486,9 +486,12 @@ function openBrowser(url) {
   });
 }
 
-// Find standalone server (bundled in bin/app for published package).
+// Find standalone server (bundled in .next/standalone for published package).
 // Prefer custom-server.js (injects real socket IP) when present.
-const standaloneDir = path.join(__dirname, "app");
+let standaloneDir = path.join(__dirname, "app");
+if (!fs.existsSync(path.join(standaloneDir, "server.js"))) {
+  standaloneDir = path.join(__dirname, "..", ".next", "standalone");
+}
 const customServerPath = path.join(standaloneDir, "custom-server.js");
 const serverPath = fs.existsSync(customServerPath)
   ? customServerPath
