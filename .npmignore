@@ -29,3 +29,10 @@ tsconfig.json
 .next/cache/
 .next/standalone/data/
 
+# Include CLI and bin
+!bin/
+!cli/hooks/
+!cli/src/
+!cli/cli.js
+!cli/app/
+

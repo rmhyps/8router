@@ -5,6 +5,25 @@
   "bin": {
     "8router": "./bin/8router.js"
   },
+  "files": [
+    "bin/",
+    "cli/cli.js",
+    "cli/hooks/",
+    "cli/src/",
+    "cli/app/",
+    "cli/package.json",
+    "cli/README.md",
+    "cli/LICENSE",
+    ".next/standalone/",
+    ".next/static/",
+    "public/",
+    "server.js",
+    "custom-server.js",
+    "open-sse/",
+    "start.sh",
+    "LICENSE",
+    "README.md"
+  ],
   "scripts": {
     "dev": "next dev --webpack --port 20127",
     "build": "node scripts/build.js",
