@@ -1,9 +1,9 @@
 <div align="center">
   <img src="./images/9router.png?1" alt="VansRoute Dashboard" width="800"/>
 
-  # ⚡ VansRoute
+# ⚡ 8Router
 
-  ### Universal AI Gateway — One Endpoint, Every Provider
+### Universal AI Gateway — One Endpoint, Every Provider
 
   **Circuit breaker resilience · Kimchi CLI-native · RTK token compression · 40+ providers · 214 tests**
 
@@ -133,9 +133,18 @@
 
 ## 🚀 Quick Start
 
+### Option 1: Global Install (Recommended)
+
 ```bash
-git clone https://github.com/Vanszs/VansRouter.git
-cd VansRouter
+npm install -g 8router
+8router
+```
+
+### Option 2: Manual Install
+
+```bash
+git clone https://github.com/rmhyps/8router.git
+cd 8router
 pnpm install
 pnpm run build
 cp -r public .next/standalone/public
@@ -143,7 +152,7 @@ cp -r .next/static .next/standalone/.next/static
 pnpm start
 ```
 
-Open `http://localhost:3003/dashboard`, add provider connections, generate a VansRoute API key, and point your CLI to `http://localhost:3003/v1`.
+Open `http://localhost:3003/dashboard`, add provider connections, generate an 8Router API key, and point your CLI to `http://localhost:3003/v1`.
 
 > **Port convention:** `pnpm dev` runs on `http://localhost:20127`. `pnpm start` (production / standalone) defaults to `http://localhost:3003` unless you override `PORT` in `.env`.
 

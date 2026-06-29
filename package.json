@@ -1,8 +1,10 @@
 {
-  "name": "9router-app",
+  "name": "8router",
   "version": "0.5.12",
-  "description": "9Router web dashboard",
-  "private": true,
+  "description": "8Router - Universal AI Gateway",
+  "bin": {
+    "8router": "./bin/8router.js"
+  },
   "scripts": {
     "dev": "next dev --webpack --port 20127",
     "build": "node scripts/build.js",
