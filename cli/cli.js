@@ -420,49 +420,7 @@ function isRestrictedEnvironment() {
 // Check if new version available, return latest version or null
 function checkForUpdate() {
   return new Promise((resolve) => {
-    if (skipUpdate) {
-      resolve(null);
-      return;
-    }
-
-    const spinner = createSpinner("Checking for updates...").start();
-    let resolved = false;
-
-    const safetyTimeout = setTimeout(() => {
-      if (!resolved) {
-        resolved = true;
-        spinner.stop();
-        resolve(null);
-      }
-    }, 8000);
-
-    const done = (version) => {
-      if (resolved) return;
-      resolved = true;
-      clearTimeout(safetyTimeout);
-      spinner.stop();
-      resolve(version);
-    };
-
-    const req = https.get(`https://registry.npmjs.org/${pkg.name}/latest`, { timeout: 3000 }, (res) => {
-      let data = "";
-      res.on("data", chunk => data += chunk);
-      res.on("end", () => {
-        try {
-          const latest = JSON.parse(data);
-          if (latest.version && compareVersions(latest.version, pkg.version) > 0) {
-            done(latest.version);
-          } else {
-            done(null);
-          }
-        } catch (e) {
-          done(null);
-        }
-      });
-    });
-
-    req.on("error", () => done(null));
-    req.on("timeout", () => { req.destroy(); done(null); });
+    resolve(null);
   });
 }
 

@@ -1,6 +1,6 @@
 {
   "name": "8router",
-  "version": "0.5.22",
+  "version": "0.5.23",
   "description": "8Router - Universal AI Gateway",
   "bin": {
     "8router": "./bin/8router.js"
