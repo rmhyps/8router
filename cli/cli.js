@@ -43,8 +43,8 @@ function createSpinner(text) {
 }
 
 const pkg = require("./package.json");
-const { ensureSqliteRuntime, buildEnvWithRuntime } = require("./hooks/sqliteRuntime");
-const { ensureTrayRuntime } = require("./hooks/trayRuntime");
+const { ensureSqliteRuntime, buildEnvWithRuntime } = require("../sqliteRuntime");
+const { ensureTrayRuntime } = require("../trayRuntime");
 const args = process.argv.slice(2);
 
 // Self-heal SQLite runtime deps (sql.js + better-sqlite3) into ~/.9router/runtime

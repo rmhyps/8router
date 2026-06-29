@@ -1,6 +1,6 @@
 {
   "name": "8router",
-  "version": "0.5.14",
+  "version": "0.5.15",
   "description": "8Router - Universal AI Gateway",
   "bin": {
     "8router": "./bin/8router.js"
@@ -8,7 +8,6 @@
   "files": [
     "bin/",
     "cli/cli.js",
-    "cli/hooks/",
     "cli/src/",
     "cli/app/",
     "cli/package.json",
@@ -22,7 +21,9 @@
     "open-sse/",
     "start.sh",
     "LICENSE",
-    "README.md"
+    "README.md",
+    "sqliteRuntime.js",
+    "trayRuntime.js"
   ],
   "scripts": {
     "dev": "next dev --webpack --port 20127",
